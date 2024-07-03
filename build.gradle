@@ -25,6 +25,9 @@ dependencies {
 
 	//runtimeOnly'com.microsoft.sqlserver:mssql-jdbc'
 
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
