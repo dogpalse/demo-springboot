@@ -2,37 +2,40 @@ package com.dogpalse.demo.sample;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dogpalse.demo.sample.dto.SampleDto;
+
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Slf4j
 @RestController
 @RequestMapping(value = "sample")
 public class SampleController {
+    
+    @Autowired
+    private SampleService sampleService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public Map<String, String> sample() {
+    public List<SampleDto> selectSampleList() {
 
-        log.trace("sample...");
-        log.debug("sample...");
-        log.info("sample...");
-        log.warn("sample...");
-        log.error("sample...");
+        log.debug("selectSampleList()");
 
-        Map<String, String> result = new HashMap<>();
-        result.put("sample", "sample is...");
-        result.put("dogpalse", "im dogpalse");
+        return sampleService.selectSampleList();
+    }
 
-        log.debug("result : {}", result);
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public SampleDto insertSample(@RequestBody SampleDto sampleDto) {
 
-        return result;
+        log.debug("insertSample : {}", sampleDto);
+
+        return sampleService.insertSample(sampleDto);
     }
 }
