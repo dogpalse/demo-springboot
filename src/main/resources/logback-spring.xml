@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds">
+
+    <springProfile name="local">
+        <property file="${user.dir}/src/main/resources/application-local.properties"></property>
+    </springProfile>
+    <springProfile name="dev">
+        <property file="${user.dir}/src/main/resources/application-dev.properties"></property>
+    </springProfile>
+    <springProfile name="prod">
+        <property file="${user.dir}/src/main/resources/application-prod.properties"></property>
+    </springProfile>
+
+    <!-- <property name="LOG_PATTERN" value="" /> -->
+    <property name="CONSOLE_PATTERN" value="%d{yyyyMMdd HH:mm:ss.SSS} [%thread] %-3level [%logger{0}:%line] - %msg %n" />
+    <property name="ROLLING_PATTERN" value="%d{yyyyMMdd HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %msg %n" />
+    <property name="LOG_PATH" value="logs/demo.log" />
+
+    <!-- Console Log Appender 설정 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Rolling Log Appender 설정 -->
+    <appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}</file>
+        <encoder>
+            <pattern>${ROLLING_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/demo_%d{yyyy-MM-dd}_%i.log.gz</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>${logger.logback.rollingpolicy.max-file-size:-10MB}</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>${logger.logback.rollingpolicy.max-history:-10}</maxHistory>
+            <totalSizeCap>${logging.logback.rollingpolicy.total-size-cap:-30GB}</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <root level="${logging.level.root:-INFO}">
+        <appender-ref ref="${logging.appender.name:-STDOUT}" />
+    </root>
+    <!-- <logger name="jdbc" level="OFF" />
+    <logger name="jdbc.sqlonly" level="INFO" />
+    <logger name="jdbc.sqltiming" level="OFF" />
+    <logger name="jdbc.audit" level="OFF" />
+    <logger name="jdbc.resultset" level="OFF" />
+    <logger name="jdbc.resultsettable" level="OFF" />
+    <logger name="jdbc.connection" level="OFF" />
+    <logger name="com.zaxxer.hikari" level="ERROR"/> -->
+    <logger name="org.springframework" level="INFO" />
+    <logger name="org.apache.http" level="INFO"/>
+    <logger name="com.dogpalse" level="${logging.level.com.dogpalse:-DEBUG}" />
+
+</configuration>
