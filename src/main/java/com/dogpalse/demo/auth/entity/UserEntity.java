@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.ColumnDefault;
 
 import com.dogpalse.demo.auth.dto.UserDto;
-import com.dogpalse.demo.core.DateUtil;
+import com.dogpalse.demo.core.util.DateUtil;
 
 import lombok.Builder;
 import lombok.Data;

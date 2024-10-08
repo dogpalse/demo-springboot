@@ -3,7 +3,7 @@ package com.dogpalse.demo.auth.dto;
 import java.util.Date;
 
 import com.dogpalse.demo.auth.entity.UserEntity;
-import com.dogpalse.demo.core.DateUtil;
+import com.dogpalse.demo.core.util.DateUtil;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
