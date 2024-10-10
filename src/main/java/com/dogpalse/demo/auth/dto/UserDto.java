@@ -1,5 +1,6 @@
 package com.dogpalse.demo.auth.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import com.dogpalse.demo.auth.entity.UserEntity;
@@ -14,10 +15,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDto {
+public class UserDto implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     
     private Long id;
-    private String email;
+    private String userEmail;
     private String userNm;
     private String userId;
     private String userPw;
@@ -33,7 +36,7 @@ public class UserDto {
     public UserEntity toEntity() {
         return UserEntity.builder()
             .id(id)
-            .email(email)
+            .userEmail(userEmail)
             .userNm(userNm)
             .userId(userId)
             .userPw(userPw)

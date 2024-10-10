@@ -29,11 +29,10 @@ public class UserEntity {
     private Long id;
 
     @Column(
-        name = "email",
         nullable = false,
         unique = true
     )
-    private String email;
+    private String userEmail;
     private String userNm;
     private String userId;
     private String userPw;
@@ -55,7 +54,7 @@ public class UserEntity {
 
     public UserDto toDto() {
         return UserDto.builder()
-            .email(email)
+            .userEmail(userEmail)
             .userNm(userNm)
             .userId(userId)
             .userPw(userPw)
