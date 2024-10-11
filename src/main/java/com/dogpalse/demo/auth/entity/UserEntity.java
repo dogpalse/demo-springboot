@@ -1,6 +1,5 @@
 package com.dogpalse.demo.auth.entity;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -8,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.ColumnDefault;
@@ -37,6 +38,19 @@ public class UserEntity {
     private String userId;
     private String userPw;
 
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private UserRoleEntity userRole;
+
+    // TODO : 부서 추가
+
+    @ColumnDefault("'E'")
+    @Column(
+        length = 2,
+        nullable = false
+    )
+    private String userStatus;
+
     @ColumnDefault("'Y'")
     @Column(
         length = 1,
@@ -54,10 +68,12 @@ public class UserEntity {
 
     public UserDto toDto() {
         return UserDto.builder()
+            .id(id)
             .userEmail(userEmail)
             .userNm(userNm)
             .userId(userId)
             .userPw(userPw)
+            .userRole(userRole.toDto())
             .enableYn(enableYn)
             .loginFailCnt(loginFailCnt)
             .lastPwChangeDt(DateUtil.convertLocalDateTimeToDate(lastPwChangeDt))

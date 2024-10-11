@@ -25,6 +25,8 @@ public class UserDto implements Serializable {
     private String userId;
     private String userPw;
 
+    private UserRoleDto userRole;
+
     private String enableYn;
     private Long loginFailCnt;
     private Date lastPwChangeDt;
@@ -40,6 +42,7 @@ public class UserDto implements Serializable {
             .userNm(userNm)
             .userId(userId)
             .userPw(userPw)
+            .userRole(userRole.toEntity())
             .enableYn(enableYn)
             .loginFailCnt(loginFailCnt)
             .lastPwChangeDt(DateUtil.convertDateToLocalDateTime(lastPwChangeDt))
