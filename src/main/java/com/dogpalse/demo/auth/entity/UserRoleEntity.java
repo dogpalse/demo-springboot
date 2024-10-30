@@ -1,5 +1,7 @@
 package com.dogpalse.demo.auth.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +18,7 @@ import lombok.Data;
 @Data
 @Builder
 @Table(name = "TB_USER_ROLE")
-public class UserRoleEntity {
+public class UserRoleEntity implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

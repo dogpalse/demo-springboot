@@ -1,5 +1,6 @@
 package com.dogpalse.demo.auth.entity;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -23,8 +24,8 @@ import lombok.Data;
 @Data
 @Builder
 @Table(name = "TB_USER")
-public class UserEntity {
-    
+public class UserEntity implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

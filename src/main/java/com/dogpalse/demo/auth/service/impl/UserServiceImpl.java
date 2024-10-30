@@ -35,4 +35,20 @@ public class UserServiceImpl implements UserService {
 
         return userList;
     }
+
+    @Override
+    public UserDto insertUser(UserDto userDto) {
+
+        log.info("userDto : {}", userDto);
+        if (userDto == null) {
+            log.error("유저 정보가 없습니다.");
+            return null;
+        }
+
+        UserEntity userEntity = userDao.save(userDto.toEntity());
+        log.info("userEntity : {}", userEntity);
+        log.info("유저 등록 성공");
+
+        return userEntity.toDto();
+    }
 }

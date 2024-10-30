@@ -20,6 +20,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 @Slf4j
@@ -35,7 +38,7 @@ public class UserController {
     @ApiResponses(value = {
         @ApiResponse(
             responseCode = "200",
-            description = "",
+            description = "유저 목록 조회 성공",
             content = {
                 @Content(
                     mediaType = MediaType.APPLICATION_JSON_VALUE, 
@@ -49,9 +52,30 @@ public class UserController {
         )
     })
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<UserDto> getMethodName() {
+    public List<UserDto> selectUserList() {
         List<UserDto> userList = userService.selectUserList();
         return userList;
+    }
+
+    @Operation(summary = "유저 등록")
+    @ApiResponses(value = {
+        @ApiResponse(
+            responseCode = "200",
+            description = "유저 등록 성공",
+            content = {
+                @Content(
+                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                    schema = @Schema(implementation = UserDto.class)
+                )
+            }
+        )
+    })
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public UserDto insertUser(@RequestBody UserDto userDto) {
+        
+        UserDto user = userService.insertUser(userDto);
+
+        return user;
     }
     
 }
